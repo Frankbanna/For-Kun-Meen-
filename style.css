@@ -1,0 +1,326 @@
+:root {
+    --primary-pink: #ff8fa3;
+    --dark-pink: #ff4d6d;
+    --bg-color: #fff0f3;
+    --white: #ffffff;
+    --text-color: #590d22;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+    text-align: center;
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* หน้า 1: กล่องจดหมาย */
+.mailbox-icon {
+    font-size: 8rem;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.btn-main {
+    background-color: var(--dark-pink);
+    color: var(--white);
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+}
+
+.btn-main:hover {
+    transform: scale(1.05);
+    background-color: var(--primary-pink);
+}
+
+/* หน้า 2: ใส่รหัสผ่าน */
+.passcode-display {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ddd;
+    transition: background 0.3s;
+}
+
+.dot.active {
+    background-color: var(--dark-pink);
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+.key {
+    background-color: var(--bg-color);
+    color: var(--dark-pink);
+    border: none;
+    padding: 15px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.key:hover {
+    background-color: #ffe5ec;
+}
+
+.key:active {
+    transform: scale(0.95);
+}
+
+.error-msg {
+    color: red;
+    font-size: 0.9rem;
+    height: 20px;
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* หน้า 3 (ใหม่): หยอกล้อ */
+.cartoon-char {
+    font-size: 7rem;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+/* หน้า 4: อวยพร */
+.heart-big {
+    font-size: 6rem;
+    color: var(--dark-pink);
+    animation: heartbeat 1.5s infinite;
+}
+
+.message h1 {
+    color: var(--dark-pink);
+    margin: 20px 0;
+}
+
+.message p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Animations */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-20px);}
+    60% {transform: translateY(-10px);}
+}
+
+/* Responsive Tweaks */
+@media (max-width: 380px) {
+    .container { padding: 1.5rem; }
+    .key { font-size: 1.2rem; padding: 10px; }
+}
+/* --- เพิ่มเติมสำหรับจัดข้อความหน้าอวยพร --- */
+
+.text-content {
+    text-align: left; /* จัดชิดซ้ายให้อ่านง่ายเหมือนจดหมาย */
+    padding: 0 10px;
+    margin-top: 20px;
+}
+
+.text-content p {
+    margin-bottom: 15px; /* เว้นระยะห่างระหว่างย่อหน้า */
+    font-size: 1rem;
+    color: #555; /* สีเทาเข้ม อ่านสบายตา */
+    line-height: 1.6; /* เพิ่มความสูงบรรทัด */
+}
+
+/* หัวข้อทักทาย */
+.greeting-header {
+    font-size: 1.2rem !important;
+    text-align: center;
+    color: var(--dark-pink) !important;
+    margin-bottom: 20px !important;
+}
+
+/* คำเน้น (ตัวหนา) */
+strong {
+    color: var(--dark-pink);
+    font-weight: 700;
+}
+
+/* ประโยคเน้น (ภูมิใจในตัวเธอ) */
+.highlight-text {
+    text-align: center;
+    font-size: 1.2rem !important;
+    font-weight: bold;
+    color: var(--dark-pink) !important;
+    background-color: #ffe6eb;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px 0 !important;
+}
+
+/* ประโยคปิดท้าย */
+.ending {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 30px !important;
+    color: var(--text-color) !important;
+}
+/* =========================================
+   ส่วนตกแต่งพิเศษสำหรับหน้าอวยพร (เพิ่มเติม)
+========================================= */
+
+/* 1. ปรับพื้นหลัง Container เฉพาะหน้านี้ให้เป็นสีชมพูอ่อนไล่สี */
+#page-greeting.special-theme.container {
+    background: linear-gradient(135deg, #fff5f7 0%, #ffe3ec 50%, #ffd1da 100%);
+    border: 3px solid #ffc2d1;
+    box-shadow: 0 20px 50px rgba(255, 77, 109, 0.3);
+    overflow: hidden; /* ซ่อนส่วนตกแต่งที่ลอยเกินขอบ */
+}
+
+/* 2. ส่วนหัวข้อ Happy Valentine */
+.greeting-header-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2; /* ให้อยู่ชั้นบนสุด */
+}
+
+.greeting-header-main h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--dark-pink);
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.main-deco {
+    font-size: 2.5rem;
+    animation: gentle-sway 3s ease-in-out infinite alternate;
+}
+
+/* 3. กล่องข้อความแบบกระจกฝ้า (Frosted Glass) */
+.message-box-glass {
+    background: rgba(255, 255, 255, 0.75); /* สีขาวโปร่งแสง */
+    backdrop-filter: blur(8px); /* เอฟเฟกต์เบลอฉากหลัง */
+    -webkit-backdrop-filter: blur(8px); /* สำหรับ Safari */
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px 0 rgba(255, 77, 109, 0.15);
+    position: relative;
+    z-index: 2; /* ให้อยู่เหนือของตกแต่งที่ลอยๆ */
+}
+
+/* --- ของตกแต่งลอยละล่อง (Floating Items) --- */
+.floating-item {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.5; /* ให้ดูจางๆ ไม่แย่งสายตา */
+    z-index: 1; /* ให้อยู่ด้านหลังข้อความ */
+    pointer-events: none; /* ไม่ให้กดโดน */
+    animation: float-around 12s linear infinite;
+}
+
+/* กำหนดตำแหน่งเริ่มต้นและขนาดของแต่ละชิ้น */
+.b1 { top: 5%; left: 5%; font-size: 2.2rem; animation-delay: 0s; }
+.b2 { bottom: 10%; right: 5%; font-size: 1.8rem; animation-delay: -4s; }
+.b3 { top: 40%; right: -2%; font-size: 1.5rem; opacity: 0.3; animation-delay: -8s; }
+
+.f1 { top: -2%; right: 15%; font-size: 2.5rem; animation-delay: -2s; }
+.f2 { bottom: 20%; left: -2%; font-size: 2rem; animation-delay: -6s; }
+.f3 { top: 60%; left: 10%; font-size: 1.8rem; opacity: 0.4; animation-delay: -10s; }
+
+
+/* --- Animations --- */
+/* โยกเยกเบาๆ สำหรับหัวข้อ */
+@keyframes gentle-sway {
+    from { transform: rotate(-5deg); }
+    to { transform: rotate(5deg); }
+}
+
+/* ลอยไปมาทั่วๆ สำหรับของตกแต่ง */
+@keyframes float-around {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(15px, 20px) rotate(5deg); }
+    50% { transform: translate(0, 35px) rotate(0deg); }
+    75% { transform: translate(-15px, 20px) rotate(-5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* (คงเดิม) สไตล์จัดข้อความจากรอบที่แล้ว */
+.text-content { text-align: left; padding: 0 5px; }
+.text-content p { margin-bottom: 15px; font-size: 1rem; color: #555; line-height: 1.6; }
+.greeting-header { font-size: 1.2rem !important; text-align: center; color: var(--dark-pink) !important; margin-bottom: 20px !important; }
+strong { color: var(--dark-pink); font-weight: 700; }
+.highlight-text { text-align: center; font-size: 1.1rem !important; font-weight: bold; color: var(--dark-pink) !important; background-color: rgba(255, 230, 235, 0.8); padding: 12px; border-radius: 10px; margin: 25px 0 !important; }
+.ending { text-align: center; font-weight: bold; margin-top: 30px !important; color: var(--text-color) !important; }

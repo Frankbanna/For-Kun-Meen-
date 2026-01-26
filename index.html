@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise For You</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <div id="page-welcome">
+            <div class="mailbox-icon">💌</div>
+            <h2>มีความจะบอก...</h2>
+            <br>
+            <button class="btn-main" onclick="goToPasscode()">ลอดกดเปิดอ่านดูครับ</button>
+        </div>
+
+        <div id="page-passcode" class="hidden">
+            <h3>กรุณาใส่รหัส (dd/mm/yy)</h3>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">(ใส่ ค.ศ. แบบเต็มนะครับ)</p>
+            
+            <div class="passcode-display" id="display-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            
+            <div class="error-msg" id="error-msg">รหัสไม่ถูกต้อง ลองใหม่อีกครั้ง!</div>
+
+            <div class="keypad">
+                <button class="key" onclick="pressKey(1)">1</button>
+                <button class="key" onclick="pressKey(2)">2</button>
+                <button class="key" onclick="pressKey(3)">3</button>
+                <button class="key" onclick="pressKey(4)">4</button>
+                <button class="key" onclick="pressKey(5)">5</button>
+                <button class="key" onclick="pressKey(6)">6</button>
+                <button class="key" onclick="pressKey(7)">7</button>
+                <button class="key" onclick="pressKey(8)">8</button>
+                <button class="key" onclick="pressKey(9)">9</button>
+                <button class="key" style="visibility: hidden;"></button>
+                <button class="key" onclick="pressKey(0)">0</button>
+                <button class="key" onclick="clearPass()" style="font-size:1rem; background-color:#ffe6eb;">C</button>
+            </div>
+        </div>
+        <div id="page-tease" class="hidden">
+            <div class="cartoon-char">🫣</div> 
+            <h2>หั้นแน้...<br>แสดงว่าอยากรู้ล่ะสิ</h2>
+            <br>
+            <button class="btn-main" onclick="goToGreeting()">ไปต่อเลย</button>
+        </div>
+        <div id="page-greeting" class="hidden special-theme">
+            
+            <div class="floating-item b1">🐇</div>
+            <div class="floating-item b2">🐇</div>
+            <div class="floating-item b3">🐇</div>
+            <div class="floating-item f1">💐</div>
+            <div class="floating-item f2">🌹</div>
+            <div class="floating-item f3">🌸</div>
+
+            <div class="greeting-header-main">
+                <span class="main-deco">💐</span>
+                <h1>Happy Valentine's Day</h1>
+                <span class="main-deco">🐇</span>
+            </div>
+            
+            <div class="message-box-glass">
+                <div class="text-content">
+                    <p class="greeting-header">สุขสันต์วันวาเลนไทน์นะ <strong>"คนเก่ง"</strong></p>
+
+                    <p>
+                        ในวันที่คนอื่นได้ไปฉลองกัน แต่เธออาจจะกำลังวิ่งวุ่นดูแลคนไข้ หรืออดหลับอดนอนอยู่เวร... 
+                        ขอบคุณจริงๆ ที่ยอมเสียสละเวลาส่วนตัวและความสุขเล็กๆ น้อยๆ ของตัวเองเพื่อดูแลชีวิตของคนอื่น
+                    </p>
+
+                    <p>
+                        เรารู้ว่า ชุดพยาบาล ที่เธอใส่มันแบกรับอะไรไว้มากมาย ทั้งความเหนื่อยล้า ความกดดัน และความรับผิดชอบที่หนักอึ้ง... 
+                        แต่เธอก็ยังทำหน้าที่ตรงนั้นได้อย่างดีที่สุดเสมอ 
+                    </p>
+                    
+                    <p class="highlight-text">
+                        "เราภูมิใจในตัวเธอมากๆ นะ"
+                    </p>
+
+                    <p>
+                        ถึงวันนี้เราอาจจะไม่ได้ฉลอง แต่ขอให้รู้ว่ากำลังใจจากตรงนี้ส่งไปให้เธอตลอด 24 ชั่วโมงนะ
+                    </p>
+                    
+                    <p class="ending">
+                        เหนื่อยก็พัก... หันมาเมื่อไหร่ก็เจอเราเสมอ ❤️
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
