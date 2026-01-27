@@ -13,6 +13,12 @@ button, .key, .btn-main {
     -webkit-tap-highlight-color: transparent; /* ลบสีเทาๆ เวลาแตะปุ่มบน iPhone ออกด้วย */
 }
 
+
+.mailbox-icon:hover {
+    /* เปลี่ยนจากลอย (float) เป็นสั่น (shake) เมื่อเอาเมาส์ชี้ */
+    animation: shake 0.5s ease-in-out infinite; 
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -331,3 +337,22 @@ strong {
 strong { color: var(--dark-pink); font-weight: 700; }
 .highlight-text { text-align: center; font-size: 1.1rem !important; font-weight: bold; color: var(--dark-pink) !important; background-color: rgba(255, 230, 235, 0.8); padding: 12px; border-radius: 10px; margin: 25px 0 !important; }
 .ending { text-align: center; font-weight: bold; margin-top: 30px !important; color: var(--text-color) !important; }
+/* --- เอฟเฟกต์หัวใจกระจายตอนกดปุ่ม --- */
+.pop-heart {
+    position: fixed;
+    font-size: 1.5rem;
+    pointer-events: none; /* เพื่อไม่ให้บังการกดปุ่ม */
+    z-index: 1000;
+    animation: popUp 0.8s ease-out forwards;
+}
+
+@keyframes popUp {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -150%) scale(1.5); /* ลอยขึ้นข้างบน */
+        opacity: 0;
+    }
+}

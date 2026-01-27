@@ -11,7 +11,13 @@ function goToPasscode() {
     document.getElementById('page-passcode').classList.remove('hidden');
 }
 
-function pressKey(num) {
+// 1. แก้ไขฟังก์ชัน pressKey ให้รับค่า event (e) เพิ่ม
+function pressKey(num, e) {
+    // เสกหัวใจตรงจุดที่กด
+    if(e) {
+        spawnHearts(e.clientX, e.clientY);
+    }
+
     if (currentInput.length < 8) {
         currentInput += num;
         updateDots();
@@ -20,6 +26,32 @@ function pressKey(num) {
         if (currentInput.length === 8) {
             setTimeout(checkPasscode, 300);
         }
+    }
+}
+
+// 2. ฟังก์ชันใหม่: เสกหัวใจกระจาย
+function spawnHearts(x, y) {
+    const hearts = ['💖', '💗', '💓', '💕', '❤️'];
+    
+    // สร้างหัวใจ 5 ดวงกระจายออก
+    for (let i = 0; i < 5; i++) {
+        const heart = document.createElement('div');
+        heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.classList.add('pop-heart');
+        
+        // สุ่มตำแหน่งกระจายนิดหน่อยรอบๆ นิ้วที่กด
+        const randomX = (Math.random() - 0.5) * 60; // กระจายซ้ายขวา
+        const randomY = (Math.random() - 0.5) * 60; // กระจายบนล่าง
+
+        heart.style.left = (x + randomX) + 'px';
+        heart.style.top = (y + randomY) + 'px';
+        
+        document.body.appendChild(heart);
+
+        // ลบทิ้งเมื่ออนิเมชั่นจบ (เพื่อไม่ให้หนักเครื่อง)
+        setTimeout(() => {
+            heart.remove();
+        }, 800);
     }
 }
 
@@ -41,11 +73,9 @@ function updateDots() {
 
 function checkPasscode() {
     if (currentInput === correctPasscode) {
-        // รหัสถูก -> ไปหน้า "หยอกล้อ" (Tease) ก่อน
         document.getElementById('page-passcode').classList.add('hidden');
         document.getElementById('page-tease').classList.remove('hidden');
     } else {
-        // รหัสผิด
         errorMsg.style.opacity = '1';
         container.classList.add('shake');
         
@@ -56,7 +86,6 @@ function checkPasscode() {
     }
 }
 
-// ฟังก์ชันใหม่: จากหน้าหยอกล้อ ไปหน้าอวยพรจริง
 function goToGreeting() {
     document.getElementById('page-tease').classList.add('hidden');
     document.getElementById('page-greeting').classList.remove('hidden');
