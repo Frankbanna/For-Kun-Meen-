@@ -356,3 +356,34 @@ strong { color: var(--dark-pink); font-weight: 700; }
         opacity: 0;
     }
 }
+
+/* สไตล์เริ่มต้นของน้องกระต่ายที่จะเสกมา */
+.jumping-rabbit {
+    position: fixed; /* ให้อยู่เหนือทุกอย่าง */
+    font-size: 2.5rem; /* ขนาดตัวกระต่าย */
+    pointer-events: none; /* ไม่ให้บังการกด */
+    z-index: 2000; /* ให้อยู่ชั้นบนสุดๆ */
+    opacity: 0; /* เริ่มต้นแบบล่องหน */
+}
+
+/* ท่ากระโดดไปทางซ้าย */
+@keyframes jumpLeftArc {
+    0% { transform: translate(-50%, -50%) scale(0.5) rotate(0deg); opacity: 1; }
+    40% { transform: translate(-120%, -150%) scale(1.1) rotate(-20deg); opacity: 1; } /* เด้งขึ้นและไปซ้าย */
+    100% { transform: translate(-250%, -50%) scale(0.8) rotate(-45deg); opacity: 0; } /* ตกลงมาและจางหาย */
+}
+
+/* ท่ากระโดดไปทางขวา (สะท้อนกระจก) */
+@keyframes jumpRightArc {
+    0% { transform: translate(-50%, -50%) scale(0.5) rotate(0deg); opacity: 1; }
+    40% { transform: translate(120%, -150%) scale(1.1) rotate(20deg); opacity: 1; } /* เด้งขึ้นและไปขวา */
+    100% { transform: translate(250%, -50%) scale(0.8) rotate(45deg); opacity: 0; } /* ตกลงมาและจางหาย */
+}
+
+/* คลาสที่จะเอาไปใส่ใน JS */
+.anim-jump-left {
+    animation: jumpLeftArc 1s ease-out forwards;
+}
+.anim-jump-right {
+    animation: jumpRightArc 1s ease-out forwards;
+}

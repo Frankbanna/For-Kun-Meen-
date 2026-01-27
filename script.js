@@ -90,3 +90,49 @@ function goToGreeting() {
     document.getElementById('page-tease').classList.add('hidden');
     document.getElementById('page-greeting').classList.remove('hidden');
 }
+
+
+
+const greetingPageDiv = document.getElementById('page-greeting');
+
+// เพิ่มตัวดักจับการกดที่หน้าอวยพร
+greetingPageDiv.addEventListener('click', function(e) {
+    // ทำงานเฉพาะตอนที่หน้าอวยพรแสดงอยู่เท่านั้น
+    if (!greetingPageDiv.classList.contains('hidden')) {
+        // เสกกระต่าย 2-3 ตัว ตรงจุดที่กด (e.clientX, e.clientY)
+        spawnRabbits(e.clientX, e.clientY);
+    }
+});
+
+// ฟังก์ชันเสกน้องกระต่าย
+function spawnRabbits(x, y) {
+    // สุ่มจำนวนกระต่าย 2 หรือ 3 ตัวต่อการกด 1 ครั้ง
+    const count = Math.floor(Math.random() * 2) + 2; 
+
+    for (let i = 0; i < count; i++) {
+        const rabbit = document.createElement('div');
+        rabbit.innerText = '🐇';
+        rabbit.classList.add('jumping-rabbit');
+
+        // สุ่มว่าจะให้กระโดดไปซ้ายหรือขวา (50/50)
+        if (Math.random() < 0.5) {
+            rabbit.classList.add('anim-jump-left');
+        } else {
+            rabbit.classList.add('anim-jump-right');
+        }
+
+        // สุ่มตำแหน่งเริ่มต้นให้กระจายๆ นิดหน่อยจากจุดที่นิ้วกด
+        const offsetX = (Math.random() - 0.5) * 40;
+        const offsetY = (Math.random() - 0.5) * 40;
+
+        rabbit.style.left = (x + offsetX) + 'px';
+        rabbit.style.top = (y + offsetY) + 'px';
+
+        document.body.appendChild(rabbit);
+
+        // ลบน้องทิ้งเมื่อกระโดดเสร็จ (1 วินาที ตาม CSS)
+        setTimeout(() => {
+            rabbit.remove();
+        }, 1000);
+    }
+}
