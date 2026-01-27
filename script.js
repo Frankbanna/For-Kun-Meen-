@@ -86,11 +86,19 @@ function checkPasscode() {
     }
 }
 
-function goToGreeting() {
-    document.getElementById('page-tease').classList.add('hidden');
-    document.getElementById('page-greeting').classList.remove('hidden');
-}
+// ฟังก์ชันเปลี่ยนไปหน้าอวยพร (อัปเดตใหม่)
+function goToGreeting(e) {
+    // ถ้ามีการกด (ส่ง event มา) ให้เสกกระต่ายก่อน
+    if (e) {
+        spawnRabbits(e.clientX, e.clientY);
+    }
 
+    // หน่วงเวลา 0.1 วินาทีนิดนึง เพื่อให้เห็นน้องกระโดดขึ้นมาก่อนเปลี่ยนหน้า
+    setTimeout(() => {
+        document.getElementById('page-tease').classList.add('hidden');
+        document.getElementById('page-greeting').classList.remove('hidden');
+    }, 100);
+}
 
 
 const greetingPageDiv = document.getElementById('page-greeting');
