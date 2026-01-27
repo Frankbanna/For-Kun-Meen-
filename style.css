@@ -6,6 +6,13 @@
     --text-color: #590d22;
 }
 
+
+/* ป้องกันการ double tap แล้วซูม สำหรับปุ่มทุกปุ่ม */
+button, .key, .btn-main {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent; /* ลบสีเทาๆ เวลาแตะปุ่มบน iPhone ออกด้วย */
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
