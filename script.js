@@ -1,22 +1,18 @@
-// --- ตั้งค่ารหัสผ่านที่นี่ ---
+// --- ตั้งค่ารหัสผ่านที่นี่ (วาเลนไทน์) ---
 const correctPasscode = '15081996'; 
 
 let currentInput = '';
 const dots = document.querySelectorAll('.dot');
 const errorMsg = document.getElementById('error-msg');
-const container = document.querySelector('.container');
+const container = document.getElementById('main-container');
 
 function goToPasscode() {
     document.getElementById('page-welcome').classList.add('hidden');
     document.getElementById('page-passcode').classList.remove('hidden');
 }
 
-// 1. แก้ไขฟังก์ชัน pressKey ให้รับค่า event (e) เพิ่ม
 function pressKey(num, e) {
-    // เสกหัวใจตรงจุดที่กด
-    if(e) {
-        spawnHearts(e.clientX, e.clientY);
-    }
+    if(e) spawnHearts(e.clientX, e.clientY);
 
     if (currentInput.length < 8) {
         currentInput += num;
@@ -29,29 +25,18 @@ function pressKey(num, e) {
     }
 }
 
-// 2. ฟังก์ชันใหม่: เสกหัวใจกระจาย
 function spawnHearts(x, y) {
     const hearts = ['💖', '💗', '💓', '💕', '❤️'];
-    
-    // สร้างหัวใจ 5 ดวงกระจายออก
     for (let i = 0; i < 5; i++) {
         const heart = document.createElement('div');
         heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
         heart.classList.add('pop-heart');
-        
-        // สุ่มตำแหน่งกระจายนิดหน่อยรอบๆ นิ้วที่กด
-        const randomX = (Math.random() - 0.5) * 60; // กระจายซ้ายขวา
-        const randomY = (Math.random() - 0.5) * 60; // กระจายบนล่าง
-
+        const randomX = (Math.random() - 0.5) * 60;
+        const randomY = (Math.random() - 0.5) * 60;
         heart.style.left = (x + randomX) + 'px';
         heart.style.top = (y + randomY) + 'px';
-        
         document.body.appendChild(heart);
-
-        // ลบทิ้งเมื่ออนิเมชั่นจบ (เพื่อไม่ให้หนักเครื่อง)
-        setTimeout(() => {
-            heart.remove();
-        }, 800);
+        setTimeout(() => heart.remove(), 800);
     }
 }
 
@@ -78,7 +63,6 @@ function checkPasscode() {
     } else {
         errorMsg.style.opacity = '1';
         container.classList.add('shake');
-        
         setTimeout(() => {
             container.classList.remove('shake');
             clearPass();
@@ -86,61 +70,101 @@ function checkPasscode() {
     }
 }
 
-// ฟังก์ชันเปลี่ยนไปหน้าอวยพร (อัปเดตใหม่)
-function goToGreeting(e) {
-    // ถ้ามีการกด (ส่ง event มา) ให้เสกกระต่ายก่อน
-    if (e) {
-        spawnRabbits(e.clientX, e.clientY);
-    }
-
-    // หน่วงเวลา 0.1 วินาทีนิดนึง เพื่อให้เห็นน้องกระโดดขึ้นมาก่อนเปลี่ยนหน้า
+// ไปหน้าทุ่งดอกไม้ และเริ่ม Animation
+function goToBouquet(e) {
+    if (e) spawnRabbits(e.clientX, e.clientY);
+    
     setTimeout(() => {
         document.getElementById('page-tease').classList.add('hidden');
-        document.getElementById('page-greeting').classList.remove('hidden');
+        document.getElementById('page-bouquet').classList.remove('hidden');
+        
+        // เริ่ม Scene นกบิน
+        playBouquetScene();
     }, 100);
 }
 
+// --- แก้ไขฟังก์ชันนี้ในไฟล์ script.js ---
+
+function playBouquetScene() {
+    const bird = document.getElementById('flying-bird');
+    const letter = document.getElementById('dropped-letter');
+
+    // 1. เริ่มสั่งให้นกบิน (โดยการเติม class 'bird-active')
+    setTimeout(() => {
+        bird.classList.add('bird-active');
+    }, 500);
+
+    // 2. กะจังหวะทิ้งจดหมาย (ในรอบแรกที่นกบินผ่าน)
+    // นกใช้เวลาบินขาไปประมาณ 40% ของ 12 วินาที = 4.8 วิ
+    // นกจะถึงกลางจอประมาณวินาทีที่ 2.4 
+    setTimeout(() => {
+        letter.classList.remove('hidden-el'); // โชว์จดหมาย
+        letter.style.top = '50%'; // สั่งให้จดหมายตกลงมา
+    }, 2500); // ทิ้งลงมาตอนผ่านไป 2.5 วิ
+}
+
+// จากจดหมาย -> ไปหน้าอวยพร
+function goToGreeting(e) {
+    if(e) {
+        spawnFlowerBurst(e.clientX, e.clientY);
+    } else {
+        spawnFlowerBurst(window.innerWidth / 2, window.innerHeight / 2);
+    }
+
+    setTimeout(() => {
+        document.getElementById('page-bouquet').classList.add('hidden');
+        document.getElementById('page-greeting').classList.remove('hidden');
+    }, 1200);
+}
+
+function spawnFlowerBurst(x, y) {
+    const flowers = ['🌸', '🌹', '🌺', '🌻', '💐', '🌷'];
+    const count = 30; 
+
+    for (let i = 0; i < count; i++) {
+        const flower = document.createElement('div');
+        flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+        flower.classList.add('flower-burst');
+        
+        const angle = Math.random() * Math.PI * 2; 
+        const velocity = 100 + Math.random() * 150; 
+        
+        const tx = Math.cos(angle) * velocity;
+        const ty = Math.sin(angle) * velocity;
+
+        flower.style.setProperty('--tx', `${tx}px`);
+        flower.style.setProperty('--ty', `${ty}px`);
+
+        flower.style.left = x + 'px';
+        flower.style.top = y + 'px';
+
+        document.body.appendChild(flower);
+        setTimeout(() => flower.remove(), 1200);
+    }
+}
 
 const greetingPageDiv = document.getElementById('page-greeting');
-
-// เพิ่มตัวดักจับการกดที่หน้าอวยพร
 greetingPageDiv.addEventListener('click', function(e) {
-    // ทำงานเฉพาะตอนที่หน้าอวยพรแสดงอยู่เท่านั้น
     if (!greetingPageDiv.classList.contains('hidden')) {
-        // เสกกระต่าย 2-3 ตัว ตรงจุดที่กด (e.clientX, e.clientY)
         spawnRabbits(e.clientX, e.clientY);
     }
 });
 
-// ฟังก์ชันเสกน้องกระต่าย
 function spawnRabbits(x, y) {
-    // สุ่มจำนวนกระต่าย 2 หรือ 3 ตัวต่อการกด 1 ครั้ง
     const count = Math.floor(Math.random() * 2) + 2; 
-
     for (let i = 0; i < count; i++) {
         const rabbit = document.createElement('div');
         rabbit.innerText = '🐇';
         rabbit.classList.add('jumping-rabbit');
-
-        // สุ่มว่าจะให้กระโดดไปซ้ายหรือขวา (50/50)
-        if (Math.random() < 0.5) {
-            rabbit.classList.add('anim-jump-left');
-        } else {
-            rabbit.classList.add('anim-jump-right');
-        }
-
-        // สุ่มตำแหน่งเริ่มต้นให้กระจายๆ นิดหน่อยจากจุดที่นิ้วกด
+        if (Math.random() < 0.5) rabbit.classList.add('anim-jump-left');
+        else rabbit.classList.add('anim-jump-right');
+        
         const offsetX = (Math.random() - 0.5) * 40;
         const offsetY = (Math.random() - 0.5) * 40;
-
         rabbit.style.left = (x + offsetX) + 'px';
         rabbit.style.top = (y + offsetY) + 'px';
-
         document.body.appendChild(rabbit);
-
-        // ลบน้องทิ้งเมื่อกระโดดเสร็จ (1 วินาที ตาม CSS)
-        setTimeout(() => {
-            rabbit.remove();
-        }, 1000);
+        setTimeout(() => rabbit.remove(), 1000);
     }
 }
+

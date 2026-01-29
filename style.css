@@ -246,10 +246,6 @@ strong {
     margin-top: 30px !important;
     color: var(--text-color) !important;
 }
-/* =========================================
-   ส่วนตกแต่งพิเศษสำหรับหน้าอวยพร (เพิ่มเติม)
-========================================= */
-
 /* 1. ปรับพื้นหลัง Container เฉพาะหน้านี้ให้เป็นสีชมพูอ่อนไล่สี */
 #page-greeting.special-theme.container {
     background: linear-gradient(135deg, #fff5f7 0%, #ffe3ec 50%, #ffd1da 100%);
@@ -357,7 +353,6 @@ strong { color: var(--dark-pink); font-weight: 700; }
     }
 }
 
-/* สไตล์เริ่มต้นของน้องกระต่ายที่จะเสกมา */
 .jumping-rabbit {
     position: fixed; /* ให้อยู่เหนือทุกอย่าง */
     font-size: 2.5rem; /* ขนาดตัวกระต่าย */
@@ -387,3 +382,539 @@ strong { color: var(--dark-pink); font-weight: 700; }
 .anim-jump-right {
     animation: jumpRightArc 1s ease-out forwards;
 }
+:root {
+    --primary-pink: #ff8fa3;
+    --dark-pink: #ff4d6d;
+    --bg-color: #fff0f3;
+    --white: #ffffff;
+    --text-color: #590d22;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+    text-align: center;
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+}
+
+.hidden { display: none !important; }
+
+/* --- หน้าแรก & ปุ่ม --- */
+.mailbox-icon {
+    font-size: 8rem;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+    cursor: pointer;
+}
+.mailbox-icon:hover {
+    animation: shake 0.5s ease-in-out infinite; 
+}
+
+.btn-main {
+    background-color: var(--dark-pink);
+    color: var(--white);
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+    touch-action: manipulation;
+}
+.btn-main:hover {
+    transform: scale(1.05);
+    background-color: var(--primary-pink);
+}
+
+/* --- หน้าใส่รหัสผ่าน --- */
+.passcode-display {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+.dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ddd;
+    transition: background 0.3s;
+}
+.dot.active { background-color: var(--dark-pink); }
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+.key {
+    background-color: var(--bg-color);
+    color: var(--dark-pink);
+    border: none;
+    padding: 15px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+}
+.key:hover { background-color: #ffe5ec; }
+.key:active { transform: scale(0.95); }
+.error-msg {
+    color: red;
+    font-size: 0.9rem;
+    height: 20px;
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* --- หน้าหยอกล้อ (Tease) --- */
+.cartoon-char {
+    font-size: 7rem;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+/* --- หน้าดอกไม้ (Bouquet) --- */
+.bouquet-img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+    margin-bottom: 25px;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* --- หน้าอวยพร (Greeting Theme) --- */
+#page-greeting.special-theme.container {
+    background: linear-gradient(135deg, #fff5f7 0%, #ffe3ec 50%, #ffd1da 100%);
+    border: 3px solid #ffc2d1;
+    box-shadow: 0 20px 50px rgba(255, 77, 109, 0.3);
+    overflow: hidden;
+}
+.greeting-header-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2;
+}
+.greeting-header-main h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--dark-pink);
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+}
+.main-deco {
+    font-size: 2.5rem;
+    animation: gentle-sway 3s ease-in-out infinite alternate;
+}
+.message-box-glass {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px 0 rgba(255, 77, 109, 0.15);
+    position: relative;
+    z-index: 2;
+}
+
+/* Typography */
+.text-content { text-align: left; padding: 0 5px; }
+.text-content p { margin-bottom: 15px; font-size: 1rem; color: #555; line-height: 1.6; }
+.greeting-header { font-size: 1.2rem !important; text-align: center; color: var(--dark-pink) !important; margin-bottom: 20px !important; }
+strong { color: var(--dark-pink); font-weight: 700; }
+.highlight-text { text-align: center; font-size: 1.1rem !important; font-weight: bold; color: var(--dark-pink) !important; background-color: rgba(255, 230, 235, 0.8); padding: 12px; border-radius: 10px; margin: 25px 0 !important; }
+.ending { text-align: center; font-weight: bold; margin-top: 30px !important; color: var(--text-color) !important; }
+
+/* Animations */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+@keyframes gentle-sway {
+    from { transform: rotate(-5deg); }
+    to { transform: rotate(5deg); }
+}
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-20px);}
+    60% {transform: translateY(-10px);}
+}
+
+/* Floating Items & Hearts */
+.floating-item {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.5;
+    z-index: 1;
+    pointer-events: none;
+    animation: float-around 12s linear infinite;
+}
+.b1 { top: 5%; left: 5%; font-size: 2.2rem; animation-delay: 0s; }
+.b2 { bottom: 10%; right: 5%; font-size: 1.8rem; animation-delay: -4s; }
+.b3 { top: 40%; right: -2%; font-size: 1.5rem; opacity: 0.3; animation-delay: -8s; }
+.f1 { top: -2%; right: 15%; font-size: 2.5rem; animation-delay: -2s; }
+.f2 { bottom: 20%; left: -2%; font-size: 2rem; animation-delay: -6s; }
+.f3 { top: 60%; left: 10%; font-size: 1.8rem; opacity: 0.4; animation-delay: -10s; }
+@keyframes float-around {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(15px, 20px) rotate(5deg); }
+    50% { transform: translate(0, 35px) rotate(0deg); }
+    75% { transform: translate(-15px, 20px) rotate(-5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.pop-heart {
+    position: fixed; font-size: 1.5rem; pointer-events: none; z-index: 1000; animation: popUp 0.8s ease-out forwards;
+}
+@keyframes popUp {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+    100% { transform: translate(-50%, -150%) scale(1.5); opacity: 0; }
+}
+
+/* Rabbit Jump */
+.jumping-rabbit { position: fixed; font-size: 2.5rem; pointer-events: none; z-index: 2000; opacity: 0; }
+@keyframes jumpLeftArc { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 40% { transform: translate(-120%, -150%) scale(1.1) rotate(-20deg); opacity: 1; } 100% { transform: translate(-250%, -50%) scale(0.8) rotate(-45deg); opacity: 0; } }
+@keyframes jumpRightArc { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 40% { transform: translate(120%, -150%) scale(1.1) rotate(20deg); opacity: 1; } 100% { transform: translate(250%, -50%) scale(0.8) rotate(45deg); opacity: 0; } }
+.anim-jump-left { animation: jumpLeftArc 1s ease-out forwards; }
+.anim-jump-right { animation: jumpRightArc 1s ease-out forwards; }
+
+@media (max-width: 380px) {
+    .container { padding: 1.5rem; min-height: 450px; }
+    .key { font-size: 1.2rem; padding: 10px; }
+    .bouquet-img { max-width: 250px; }
+}
+/* ... (โค้ดเดิมทั้งหมด) ... */
+
+/* --- ส่วนที่เพิ่ม: เอฟเฟกต์ดอกไม้ระเบิด (Flower Burst) --- */
+.flower-burst {
+    position: fixed;
+    font-size: 2.5rem;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    /* การเคลื่อนที่กำหนดด้วยตัวแปร CSS Variable ใน JS */
+    animation: burstAnimation 1.2s ease-out forwards;
+}
+
+@keyframes burstAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        /* ใช้ var ที่ส่งมาจาก JS เพื่อกำหนดทิศทาง */
+        transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* --- แก้ไข: หน้าทุ่งดอกไม้ (Flower Field) --- */
+#page-bouquet {
+    /* ใช้รูปพื้นหลังทุ่งดอกไม้ใหม่ที่สว่างขึ้น */
+    background: url('https://images.unsplash.com/photo-1462275646964-a0e338679cde?auto=format&fit=crop&w=800&q=80') no-repeat center center;
+    background-size: cover;
+    /* บังคับให้เต็มพื้นที่ Container */
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    border-radius: 20px; /* ให้มุมโค้งตาม Container หลัก */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* ป้องกันนกบินทะลุขอบ */
+}
+
+/* ช่อกุหลาบขาวตรงกลาง */
+.center-white-rose {
+    width: 220px;       /* ปรับขนาดให้พอดี */
+    height: 220px;      /* บังคับความสูงให้เท่ากันเพื่อให้เป็นวงกลม */
+    object-fit: cover;  /* ตัดภาพส่วนเกินออกให้รูปไม่เบี้ยว */
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    animation: float 3s ease-in-out infinite;
+    z-index: 10;
+    background-color: white; /* ใส่พื้นหลังสีขาวรองไว้ถ้ารูปโหลดไม่ทัน */
+}
+
+/* --- นกบินไป-กลับ (Loop) --- */
+.bird-fly {
+    position: absolute;
+    top: 15%;
+    left: -20%; /* จุดเริ่มต้นนอกจอ */
+    font-size: 5rem;
+    z-index: 20;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+    pointer-events: none;
+    opacity: 0; /* ซ่อนไว้ก่อน เดี๋ยว JS จะสั่งให้แสดง */
+}
+
+/* คลาสที่จะเติมด้วย JS เพื่อเริ่มบิน */
+.bird-active {
+    opacity: 1;
+    /* บินวนไปเรื่อยๆ รอบละ 8 วินาที */
+    animation: flyCycle 8s linear infinite; 
+}
+
+@keyframes flyCycle {
+    /* --- ขาไป (หันขวา) --- */
+    0% { 
+        left: -20%; 
+        transform: scaleX(1); /* หันหน้าปกติ */
+    }
+    40% { 
+        left: 120%; /* บินทะลุขอบขวา */
+        transform: scaleX(1); 
+    }
+    
+    /* --- ช่วงกลับตัว (อยู่นอกจอขวา) --- */
+    41% { 
+        left: 120%; 
+        transform: scaleX(-1); /* กลับด้าน (หันซ้าย) */
+    }
+    50% { 
+        left: 120%; 
+        transform: scaleX(-1); /* รอแป๊บนึง */
+    }
+
+    /* --- ขากลับ (หันซ้าย) --- */
+    90% { 
+        left: -20%; /* บินกลับมาขอบซ้าย */
+        transform: scaleX(-1); 
+    }
+
+    /* --- ช่วงกลับตัว (อยู่นอกจอซ้าย) --- */
+    91% { 
+        left: -20%; 
+        transform: scaleX(1); /* หันหน้ากลับมาปกติ */
+    }
+    100% { 
+        left: -20%; 
+        transform: scaleX(1); /* จบรอบ เตรียมบินใหม่ */
+    }
+}
+
+/* จดหมาย */
+.falling-letter {
+    position: absolute;
+    top: 20%; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3.5rem;
+    cursor: pointer;
+    z-index: 15;
+    text-align: center;
+    transition: top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.falling-letter:hover { transform: translateX(-50%) scale(1.1); }
+.hidden-el { opacity: 0; pointer-events: none; }
+
+.click-hint {
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: var(--dark-pink);
+    font-weight: bold;
+    margin-top: -5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    animation: pulse 1s infinite;
+    white-space: nowrap;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* --- (ส่วนเพิ่มเติม เอฟเฟกต์ดอกไม้ระเบิด จากรอบที่แล้ว) --- */
+.flower-burst {
+    position: fixed;
+    font-size: 2.5rem;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    animation: burstAnimation 1.2s ease-out forwards;
+}
+
+@keyframes burstAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(360deg);
+        opacity: 0;
+    }
+}
+/* ... (โค้ดเดิมส่วนบน คงไว้เหมือนเดิม) ... */
+
+/* --- แก้ไข: หน้าทุ่งดอกไม้ (Version จัดเต็ม) --- */
+#page-bouquet {
+    /* พื้นหลังทุ่งดอกไม้ */
+    background: url('https://images.unsplash.com/photo-1490750967868-58cb75069ed6?auto=format&fit=crop&w=800&q=80') no-repeat center center;
+    background-size: cover;
+    position: absolute;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    border-radius: 20px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    overflow: hidden;
+}
+
+/* เลเยอร์แสงบรรยากาศ (Vignette & Glow) */
+.atmosphere-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* ไล่สีจากตรงกลางสว่างๆ ไปขอบมืดๆ และมีสีชมพูจางๆ */
+    background: radial-gradient(circle at center, rgba(255, 235, 240, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none; /* ให้ทะลุผ่านได้ */
+    z-index: 5;
+}
+
+/* คอนเทนเนอร์สำหรับกุหลาบ เพื่อใส่แสงฟุ้งหลังกุหลาบ */
+.rose-container {
+    position: relative;
+    z-index: 10;
+}
+/* แสงฟุ้ง (Bloom) หลังกุหลาบ */
+.rose-container::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(20px);
+    z-index: -1; /* อยู่หลังรูปกุหลาบ */
+    animation: pulseGlow 3s infinite alternate;
+}
+@keyframes pulseGlow { from { opacity: 0.7; scale: 1; } to { opacity: 1; scale: 1.1; } }
+
+/* รูปช่อกุหลาบขาว */
+.center-white-rose {
+    width: 220px; height: 220px; object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5); /* เงาเข้มขึ้น */
+    animation: float 3s ease-in-out infinite;
+    background-color: #fff;
+}
+
+/* --- กลีบดอกไม้โปรย (Falling Petals) --- */
+.falling-petal {
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    top: -10%; /* เริ่มต้นเหนือจอ */
+    z-index: 8; /* อยู่หลังกุหลาบ แต่อยู่หน้าพื้นหลัง */
+    pointer-events: none;
+    animation: fallAndSway linear infinite;
+}
+/* สุ่มตำแหน่งเริ่มต้น ความเร็ว และการหมุนของแต่ละกลีบ */
+.p1 { left: 10%; animation-duration: 8s; animation-delay: 0s; font-size: 1.2rem; }
+.p2 { left: 30%; animation-duration: 12s; animation-delay: -2s; }
+.p3 { left: 50%; animation-duration: 10s; animation-delay: -5s; font-size: 1.8rem; }
+.p4 { left: 70%; animation-duration: 9s; animation-delay: -1s; }
+.p5 { left: 90%; animation-duration: 11s; animation-delay: -3s; font-size: 1.4rem;}
+.p6 { left: 20%; animation-duration: 13s; animation-delay: -7s; }
+.p7 { left: 80%; animation-duration: 7s; animation-delay: -4s; font-size: 1rem;}
+
+@keyframes fallAndSway {
+    0% { top: -10%; transform: translateX(0) rotate(0deg); }
+    50% { transform: translateX(50px) rotate(180deg); } /* ส่ายไปทางขวา */
+    100% { top: 110%; transform: translateX(-50px) rotate(360deg); } /* ตกเลยจอและส่ายกลับซ้าย */
+}
+
+/* --- นกบินไป-กลับ (คงเดิม) --- */
+.bird-fly {
+    position: absolute; top: 15%; left: -20%;
+    font-size: 5rem; z-index: 20;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+    pointer-events: none; opacity: 0;
+}
+.bird-active { opacity: 1; animation: flyCycle 12s linear infinite; }
+@keyframes flyCycle {
+    0% { left: -20%; transform: scaleX(1); }
+    40% { left: 120%; transform: scaleX(1); }
+    41% { left: 120%; transform: scaleX(-1); }
+    50% { left: 120%; transform: scaleX(-1); }
+    90% { left: -20%; transform: scaleX(-1); }
+    91% { left: -20%; transform: scaleX(1); }
+    100% { left: -20%; transform: scaleX(1); }
+}
+
+/* --- จดหมาย (คงเดิม) --- */
+.falling-letter {
+    position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+    font-size: 4rem; cursor: pointer; z-index: 25; /* z-index สูงสุดเพื่อให้กดได้ */
+    text-align: center;
+    transition: top 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex; flex-direction: column; align-items: center;
+}
+.falling-letter:hover { transform: translateX(-50%) scale(1.1); }
+.hidden-el { opacity: 0; pointer-events: none; }
+.click-hint {
+    font-size: 1rem; background: #fff; padding: 5px 15px; border-radius: 20px;
+    color: var(--dark-pink); font-weight: bold; margin-top: -5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); animation: pulse 1s infinite; white-space: nowrap;
+}
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+/* ... (โค้ดส่วนอื่นๆ ด้านล่างคงไว้เหมือนเดิม) ... */

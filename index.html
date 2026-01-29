@@ -9,18 +9,17 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" id="main-container">
         <div id="page-welcome">
              <div class="mailbox-icon" onclick="goToPasscode()">💌</div>
-    
              <h2>มีความในใจจะบอก...</h2>
-              <br>
+             <br>
             <button class="btn-main" onclick="goToPasscode()">เปิดอ่านจดหมาย</button>
         </div>
 
         <div id="page-passcode" class="hidden">
-            <h3>กรุณาใส่รหัส (dd/mm/yy)</h3>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">(ใส่ ค.ศ. แบบเต็มนะครับ)</p>
+            <h3>กรุณาใส่รหัส</h3>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">(ใบ้: วันเกิดเธอ ใส่ปี ค.ศ. นะครับ)</p>
             
             <div class="passcode-display" id="display-dots">
                 <div class="dot"></div>
@@ -50,12 +49,38 @@
                 <button class="key" onclick="clearPass()" style="font-size:1rem; background-color:#ffe6eb;">C</button>
             </div>
         </div>
+
         <div id="page-tease" class="hidden">
             <div class="cartoon-char">🫣</div> 
             <h2>ฮั่นแน้...<br>แสดงว่าอยากรู้ล่ะสิ</h2>
             <br>
-            <button class="btn-main" onclick="goToGreeting(event)">ไปต่อเลย</button>
+            <button class="btn-main" onclick="goToBouquet(event)">ไปต่อเลย</button>
         </div>
+        
+        <div id="page-bouquet" class="hidden">
+            <div class="atmosphere-overlay"></div>
+            
+            <div class="falling-petal p1">🌸</div>
+            <div class="falling-petal p2">🌸</div>
+            <div class="falling-petal p3">🌹</div>
+            <div class="falling-petal p4">🌸</div>
+            <div class="falling-petal p5">🌹</div>
+            <div class="falling-petal p6">🌸</div>
+            <div class="falling-petal p7">🌸</div>
+
+            <div class="rose-container">
+                 <img src="https://i.pinimg.com/736x/7b/eb/ef/7bebefa8c1b5bc74d6c8fc177a04ee82.jpg" alt="White Rose" class="center-white-rose">
+            </div>
+           
+            <div id="flying-bird" class="bird-fly">🕊️</div>
+
+            <div id="dropped-letter" class="falling-letter hidden-el" onclick="goToGreeting(event)">
+                💌
+                <span class="click-hint">เปิดอ่านได้เลย</span>
+            </div>
+        </div>
+
+        
         <div id="page-greeting" class="hidden special-theme">
             
             <div class="floating-item b1">🐇</div>
@@ -79,7 +104,6 @@
                         ในวันที่คนอื่นได้ไปฉลองกัน แต่เธออาจจะกำลังวิ่งวุ่นดูแลคนไข้ หรืออดหลับอดนอนอยู่เวร... 
                         ขอบคุณจริงๆ ที่ยอมเสียสละเวลาส่วนตัว ของตัวเองเพื่อดูแลชีวิตของคนอื่น
                     </p>
-
                     
                     <p class="highlight-text">
                         "เราภูมิใจในตัวเธอมากๆ นะ"
