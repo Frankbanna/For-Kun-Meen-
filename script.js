@@ -103,19 +103,32 @@ function playBouquetScene() {
     }, 2500); // ทิ้งลงมาตอนผ่านไป 2.5 วิ
 }
 
-// จากจดหมาย -> ไปหน้าอวยพร
-function goToGreeting(e) {
+async function goToGreeting(e) {
     if(e) {
         spawnFlowerBurst(e.clientX, e.clientY);
     } else {
         spawnFlowerBurst(window.innerWidth / 2, window.innerHeight / 2);
     }
 
-    setTimeout(() => {
-        document.getElementById('page-bouquet').classList.add('hidden');
-        document.getElementById('page-greeting').classList.remove('hidden');
-    }, 1200);
+    await new Promise(r => setTimeout(r, 1200));
+
+    document.getElementById('page-bouquet').classList.add('hidden');
+    const greetingPage = document.getElementById('page-greeting');
+    greetingPage.classList.remove('hidden');
+
+    const paragraphs = greetingPage.querySelectorAll('.text-content p');
+
+    for (let p of paragraphs) {
+        p.style.opacity = "0";
+    }
+
+    for (let p of paragraphs) {
+        await new Promise(r => setTimeout(r, 400));
+        await smoothTypeWriter(p, 28);
+    }
 }
+
+
 
 function spawnFlowerBurst(x, y) {
     const flowers = ['🌸', '🌹', '🌺', '🌻', '💐', '🌷'];
@@ -167,4 +180,99 @@ function spawnRabbits(x, y) {
         setTimeout(() => rabbit.remove(), 1000);
     }
 }
+// --- Typewriter ที่รองรับ HTML ---
+// ===== Ultra Smooth Typewriter =====
+function smoothTypeWriter(element, speed = 25) {
+    return new Promise(resolve => {
+
+        const originalHTML = element.innerHTML;
+        element.innerHTML = "";
+        element.style.opacity = "1";
+
+        // สร้าง cursor
+        const cursor = document.createElement("span");
+        cursor.className = "typing-cursor";
+        element.appendChild(cursor);
+
+        let container = document.createElement("div");
+        container.innerHTML = originalHTML;
+        let nodes = Array.from(container.childNodes);
+
+        let nodeIndex = 0;
+
+        function typeNextNode() {
+            if (nodeIndex >= nodes.length) {
+                cursor.remove();
+                resolve();
+                return;
+            }
+
+            let node = nodes[nodeIndex];
+
+            if (node.nodeType === 3) { // TEXT NODE
+                let text = node.textContent;
+                let i = 0;
+                let span = document.createElement("span");
+                element.insertBefore(span, cursor);
+
+                function typeChar() {
+                    if (i < text.length) {
+                        span.textContent += text[i];
+                        i++;
+                        setTimeout(typeChar, speed);
+                    } else {
+                        nodeIndex++;
+                        typeNextNode();
+                    }
+                }
+                typeChar();
+            } 
+            else if (node.nodeType === 1) { // ELEMENT NODE
+                let clone = node.cloneNode(false);
+                element.insertBefore(clone, cursor);
+
+                let childNodes = Array.from(node.childNodes);
+                let childIndex = 0;
+
+                function typeChild() {
+                    if (childIndex >= childNodes.length) {
+                        nodeIndex++;
+                        typeNextNode();
+                        return;
+                    }
+
+                    let child = childNodes[childIndex];
+
+                    if (child.nodeType === 3) {
+                        let text = child.textContent;
+                        let i = 0;
+                        let span = document.createElement("span");
+                        clone.appendChild(span);
+
+                        function typeChar() {
+                            if (i < text.length) {
+                                span.textContent += text[i];
+                                i++;
+                                setTimeout(typeChar, speed);
+                            } else {
+                                childIndex++;
+                                typeChild();
+                            }
+                        }
+                        typeChar();
+                    } else {
+                        clone.appendChild(child.cloneNode(true));
+                        childIndex++;
+                        typeChild();
+                    }
+                }
+
+                typeChild();
+            }
+        }
+
+        typeNextNode();
+    });
+}
+
 
