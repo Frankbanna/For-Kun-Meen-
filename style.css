@@ -1190,3 +1190,23 @@ button, div {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* ปิดการเลือกข้อความทั้งหมด */
+body {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* ปิด long-press menu บน iOS */
+* {
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+#hold-heart, 
+#hold-heart * {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
