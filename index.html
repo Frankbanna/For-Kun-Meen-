@@ -3,100 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Surprise For You</title>
+    <title>Surprise For You 💖</title>
+
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <div class="container" id="main-container">
-        <div id="page-welcome">
-             <div class="mailbox-icon" onclick="goToPasscode()">💌</div>
-             <h2>มีความในใจจะบอก...</h2>
-             <br>
-            <button class="btn-main" onclick="goToPasscode()">เปิดอ่านจดหมาย</button>
-        </div>
+<div class="container" id="main-container">
 
-        <div id="page-passcode" class="hidden">
-            <h3>กรุณาใส่รหัส</h3>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">(ใบ้: วันเกิดเธอ ใส่ปี ค.ศ. นะครับ)</p>
-            
-            <div class="passcode-display" id="display-dots">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-            
-            <div class="error-msg" id="error-msg">รหัสไม่ถูกต้อง ลองใหม่อีกครั้ง!</div>
+    <!-- ===================== -->
+    <!--        หน้าแรก        -->
+    <!-- ===================== -->
+    <div id="page-welcome">
+        <div class="mailbox-icon" onclick="goToHeartPage()">💌</div>
+        <h2>มีบางอย่างอยากบอกเธอ...</h2>
+        <br>
+        <button class="btn-main" onclick="goToHeartPage()">เปิดอ่าน</button>
+    </div>
 
-           <div class="keypad">
-                <button class="key" onclick="pressKey(1, event)">1</button>
-                <button class="key" onclick="pressKey(2, event)">2</button>
-                <button class="key" onclick="pressKey(3, event)">3</button>
-                <button class="key" onclick="pressKey(4, event)">4</button>
-                <button class="key" onclick="pressKey(5, event)">5</button>
-                <button class="key" onclick="pressKey(6, event)">6</button>
-                <button class="key" onclick="pressKey(7, event)">7</button>
-                <button class="key" onclick="pressKey(8, event)">8</button>
-                <button class="key" onclick="pressKey(9, event)">9</button>
-                <button class="key" style="visibility: hidden;"></button>
-                <button class="key" onclick="pressKey(0, event)">0</button>
-                <button class="key" onclick="clearPass()" style="font-size:1rem; background-color:#ffe6eb;">C</button>
+
+    <!-- ===================== -->
+    <!--     หน้า Heart Hold   -->
+    <!-- ===================== -->
+    <div id="page-heart" class="hidden">
+        <h2>ก่อนจะไปต่อ...</h2>
+        <p style="margin-bottom:20px;">กดรูปหัวใจค้างไว้ให้เต็มนะ 💖</p>
+
+        <div class="heart-wrapper">
+            <div class="heart-progress" id="heart-progress"></div>
+
+            <div class="heart-shape"
+                 id="hold-heart"
+                 onmousedown="startHold()"
+                 onmouseup="endHold()"
+                 onmouseleave="endHold()"
+                 ontouchstart="startHold()"
+                 ontouchend="endHold()">
+                ❤️
             </div>
         </div>
 
-        <div id="page-tease" class="hidden">
-            <div class="cartoon-char">🫣</div> 
-            <h2>ฮั่นแน้...<br>แสดงว่าอยากรู้ล่ะสิ</h2>
-            <br>
-            <button class="btn-main" onclick="goToBouquet(event)">ไปต่อเลย</button>
+        <div class="hold-text" id="hold-text">0%</div>
+    </div>
+
+
+    <!-- ===================== -->
+    <!--        หน้า Tease     -->
+    <!-- ===================== -->
+    <div id="page-tease" class="hidden">
+        <div class="cartoon-char">🫣</div>
+        <h2>ฮั่นแน้...<br>อยากรู้ล่ะสิ 😏</h2>
+        <br>
+        <button class="btn-main" onclick="goToPasscodeFromTease(event)">ไปต่อเลย</button>
+    </div>
+
+
+    <!-- ===================== -->
+    <!--     หน้าใส่รหัส       -->
+    <!-- ===================== -->
+    <div id="page-passcode" class="hidden">
+        <h3>กรุณาใส่รหัส</h3>
+
+        <p style="font-size: 0.85rem; color: #888; margin-bottom: 15px;">
+            (ใบ้: วันเกิดเธอ ใส่ปี ค.ศ.)
+        </p>
+
+        <div class="passcode-display">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
-        
-        <div id="page-bouquet" class="hidden">
-            <div class="atmosphere-overlay"></div>
-            
-            <div class="falling-petal p1">🌸</div>
-            <div class="falling-petal p2">🌸</div>
-            <div class="falling-petal p3">🌹</div>
-            <div class="falling-petal p4">🌸</div>
-            <div class="falling-petal p5">🌹</div>
-            <div class="falling-petal p6">🌸</div>
-            <div class="falling-petal p7">🌸</div>
 
-            <div class="rose-container">
-                 <img src="https://i.pinimg.com/736x/7b/eb/ef/7bebefa8c1b5bc74d6c8fc177a04ee82.jpg" alt="White Rose" class="center-white-rose">
-            </div>
-           
-            <div id="flying-bird" class="bird-fly">🕊️</div>
-
-            <div id="dropped-letter" class="falling-letter hidden-el" onclick="goToGreeting(event)">
-                💌
-                <span class="click-hint">เปิดอ่านได้เลย</span>
-            </div>
+        <div class="error-msg" id="error-msg">
+            รหัสไม่ถูกต้อง ลองใหม่อีกครั้งนะ 💔
         </div>
 
-        
-        <div id="page-greeting" class="hidden special-theme">
-            
-            <div class="floating-item b1">🐇</div>
-            <div class="floating-item b2">🐇</div>
-            <div class="floating-item b3">🐇</div>
-            <div class="floating-item f1">💐</div>
-            <div class="floating-item f2">🌹</div>
-            <div class="floating-item f3">🌸</div>
+        <div class="keypad">
+            <button class="key" onclick="pressKey(1, event)">1</button>
+            <button class="key" onclick="pressKey(2, event)">2</button>
+            <button class="key" onclick="pressKey(3, event)">3</button>
+            <button class="key" onclick="pressKey(4, event)">4</button>
+            <button class="key" onclick="pressKey(5, event)">5</button>
+            <button class="key" onclick="pressKey(6, event)">6</button>
+            <button class="key" onclick="pressKey(7, event)">7</button>
+            <button class="key" onclick="pressKey(8, event)">8</button>
+            <button class="key" onclick="pressKey(9, event)">9</button>
+            <button class="key" style="visibility:hidden;"></button>
+            <button class="key" onclick="pressKey(0, event)">0</button>
+            <button class="key clear-btn" onclick="clearPass()">C</button>
+        </div>
+    </div>
 
-            <div class="greeting-header-main">
-                <span class="main-deco">💐</span>
-                <h1>Happy Valentine's Day</h1>
-                <span class="main-deco">🐇</span>
-            </div>
-            
-            <div class="message-box-glass">
+
+    <!-- ===================== -->
+    <!--      หน้าทุ่งดอกไม้   -->
+    <!-- ===================== -->
+    <div id="page-bouquet" class="hidden">
+
+        <div class="falling-petal p1">🌸</div>
+        <div class="falling-petal p2">🌸</div>
+        <div class="falling-petal p3">🌹</div>
+        <div class="falling-petal p4">🌸</div>
+        <div class="falling-petal p5">🌹</div>
+
+        <div class="rose-container">
+            <img src="https://i.pinimg.com/736x/7b/eb/ef/7bebefa8c1b5bc74d6c8fc177a04ee82.jpg"
+                 alt="White Rose"
+                 class="center-white-rose">
+        </div>
+
+        <div id="flying-bird" class="bird-fly">🕊️</div>
+
+        <div id="dropped-letter"
+             class="falling-letter hidden-el"
+             onclick="goToGreeting(event)">
+            💌
+            <span class="click-hint">กดเปิดอ่านได้เลย</span>
+        </div>
+
+    </div>
+
+
+    <!-- ===================== -->
+    <!--     หน้าอวยพร         -->
+    <!-- ===================== -->
+    <div id="page-greeting" class="hidden special-theme">
+
+        <div class="greeting-header-main">
+            <span>💐</span>
+            <h1>Happy Valentine's Day</h1>
+            <span>🐇</span>
+        </div>
+
+        <div class="message-box-glass">
                 <div class="text-content">
                     <p class="greeting-header">สุขสันต์วันวาเลนไทน์นะ <br><strong>"คนเก่ง"</strong></p>
 
@@ -118,9 +164,12 @@
                     </p>
                 </div>
             </div>
-        </div>
     </div>
 
-    <script src="script.js"></script>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
