@@ -1033,4 +1033,157 @@ strong { color: var(--dark-pink); font-weight: 700; }
     from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
 }
+.heart-click-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circle-progress {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: conic-gradient(#ff4d88 0deg, #ffd6e7 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.circle-inner {
+    width: 130px;
+    height: 130px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.circle-inner:active {
+    transform: scale(0.9);
+}
+
+.progress-text {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #ff4d88;
+}
+/* ปิดไฮไลท์สีฟ้าตอนคลิก */
+.circle-inner,
+.circle-inner * {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    user-select: none;
+}
+
+/* ปิด focus border */
+.circle-inner:focus {
+    outline: none;
+}
+.hold-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circle-progress {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: conic-gradient(#ff4d88 0deg, #ffd6e7 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s linear;
+}
+
+.circle-inner {
+    width: 140px;
+    height: 140px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff4d88;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.circle-inner:active {
+    transform: scale(0.95);
+}
+
+.progress-text {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #ff4d88;
+}
+
+/* ตอนเต็ม */
+.full-glow {
+    box-shadow: 0 0 30px #ff4d88;
+}
+.circle-inner {
+    width: 140px;
+    height: 140px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.heart-center {
+    font-size: 3rem;
+    transition: transform 0.15s ease, filter 0.3s ease;
+}
+
+.percent {
+    position: absolute;
+    bottom: 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #ff4d88;
+}
+
+/* ตอนกำลังกด */
+.beating {
+    animation: heartbeat 0.6s infinite;
+}
+
+@keyframes heartbeat {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.15); }
+    40%  { transform: scale(1); }
+    60%  { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* ตอนใกล้เต็ม */
+.almost-full {
+    filter: drop-shadow(0 0 10px #ff4d88);
+}
+
+/* ตอนเต็ม */
+.full-burst {
+    animation: burst 0.5s ease;
+}
+
+@keyframes burst {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
 

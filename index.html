@@ -24,29 +24,37 @@
     </div>
 
 
-    <!-- ===================== -->
-    <!--     หน้า Heart Hold   -->
-    <!-- ===================== -->
-    <div id="page-heart" class="hidden">
-        <h2>ก่อนจะไปต่อ...</h2>
-        <p style="margin-bottom:20px;">กดรูปหัวใจค้างไว้ให้เต็มนะ 💖</p>
+<div id="page-heart" class="hidden">
+    <h2>Before we go on...</h2>
+    <p style="margin-bottom:20px;">Press and hold the heart 💖</p>
 
-        <div class="heart-wrapper">
-            <div class="heart-progress" id="heart-progress"></div>
+    <div class="hold-wrapper">
 
-            <div class="heart-shape"
+        <!-- วงแหวน progress -->
+        <div class="circle-progress" id="circle-progress">
+
+            <!-- วงใน -->
+            <div class="circle-inner"
                  id="hold-heart"
                  onmousedown="startHold()"
                  onmouseup="endHold()"
                  onmouseleave="endHold()"
                  ontouchstart="startHold()"
                  ontouchend="endHold()">
-                ❤️
+
+                <div class="heart-center" id="heart-center">❤️</div>
+                <div class="percent" id="percent-text">0%</div>
+
             </div>
         </div>
 
-        <div class="hold-text" id="hold-text">0%</div>
+        <div class="progress-text" id="progress-text">
+            เหลืออีก 100%
+        </div>
+
     </div>
+</div>
+
 
 
     <!-- ===================== -->

@@ -44,32 +44,50 @@ function goToBouquet(e) {
 
 
 // ===============================
-//        HEART HOLD SYSTEM
+//      HOLD HEART SYSTEM
 // ===============================
+
+
 function startHold() {
+
+    const heart = document.getElementById("heart-center");
+    heart.classList.add("beating");
+
     if (holdInterval) return;
 
     holdInterval = setInterval(() => {
+
         if (holdProgress >= 100) {
+
             clearInterval(holdInterval);
             holdInterval = null;
 
-            document.getElementById("hold-heart").classList.add("heart-complete");
+            heart.classList.remove("beating");
+            heart.classList.add("full-burst");
+
+            document.getElementById("circle-progress")
+                .classList.add("full-glow");
 
             setTimeout(() => {
                 goToTease();
-                holdProgress = 0;
-                updateHeartProgress();
+                resetHold();
+                heart.classList.remove("full-burst");
             }, 800);
 
         } else {
-            holdProgress += 2;
-            updateHeartProgress();
+            holdProgress += 1.5;
+            updateHoldProgress();
         }
-    }, 40);
+
+    }, 20);
 }
 
+
 function endHold() {
+
+    const heart = document.getElementById("heart-center");
+    heart.classList.remove("beating");
+
     clearInterval(holdInterval);
     holdInterval = null;
 
@@ -79,17 +97,51 @@ function endHold() {
                 clearInterval(decrease);
                 holdProgress = 0;
             } else {
-                holdProgress -= 3;
-                updateHeartProgress();
+                holdProgress -= 2;
+                updateHoldProgress();
             }
         }, 20);
     }
 }
 
-function updateHeartProgress() {
-    document.getElementById("heart-progress").style.height = holdProgress + "%";
-    document.getElementById("hold-text").innerText = holdProgress + "%";
+function updateHoldProgress() {
+
+    const circle = document.getElementById("circle-progress");
+    const percentText = document.getElementById("percent-text");
+    const progressText = document.getElementById("progress-text");
+    const heart = document.getElementById("heart-center");
+
+    const degree = (holdProgress / 100) * 360;
+
+    circle.style.background =
+        `conic-gradient(#ff4d88 ${degree}deg, #ffd6e7 ${degree}deg)`;
+
+    percentText.innerText = Math.floor(holdProgress) + "%";
+
+    const remaining = 100 - Math.floor(holdProgress);
+
+    if (remaining > 0) {
+        progressText.innerText = `เหลืออีก ${remaining}%`;
+    } else {
+        progressText.innerText = "ครบแล้ว 💖";
+    }
+
+    // ใกล้เต็ม
+    if (holdProgress >= 80) {
+        heart.classList.add("almost-full");
+    } else {
+        heart.classList.remove("almost-full");
+    }
 }
+
+
+function resetHold() {
+    holdProgress = 0;
+    updateHoldProgress();
+    document.getElementById("circle-progress").classList.remove("full-glow");
+}
+
+
 
 
 // ===============================
