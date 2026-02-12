@@ -1186,4 +1186,7 @@ strong { color: var(--dark-pink); font-weight: 700; }
     50% { transform: scale(1.4); }
     100% { transform: scale(1); }
 }
+button, div {
+    -webkit-tap-highlight-color: transparent;
+}
 
